@@ -1,9 +1,9 @@
-.heaeder__logo {
+.header__logo {
     max-width: 142px;
   }
 
   @media screen and (max-width:960px) {
-   .heaeder__logo{
+   .header__logo{
     margin-left: 27px;
    }
   }
