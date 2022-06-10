@@ -1,12 +1,19 @@
-.popup__info{
+.popup__info-form-input{
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 17px;
     color: #000000;
     background-color: transparent;
     border: none;
-    border-bottom:1px solid #00000020;
+    outline: none;
+    border-bottom:1px solid rgba(0 0 0 /20%);
     padding-bottom: 13px;
+    box-sizing: border-box;
+    
+}
+
+
+.popup__info-form-input:first-of-type{
+    margin-bottom: 29px;
 }
