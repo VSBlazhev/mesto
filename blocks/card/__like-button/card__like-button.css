@@ -7,6 +7,6 @@
   outline: none;
 }
 
-.card__like-button:hover{
+.card__like-button:hover {
   opacity: 0.5;
 }

@@ -16,11 +16,10 @@
   .header::after {
     margin-top: 31.6px;
   }
-
 }
 
 @media screen and (max-width: 650px) {
   .header {
     padding-top: 28px;
   }
-  }
+}
