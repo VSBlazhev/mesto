@@ -19,6 +19,7 @@ function formSubmitHandler(evt) {
 
   profileName.textContent = nameInput.value;
   profileInfo.textContent = jobInput.value;
+  popupClose()
 }
 
 function popupClose() {

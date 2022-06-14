@@ -10,6 +10,7 @@
   min-width: 24px;
   height: 24px;
   outline: none;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 650px) {
