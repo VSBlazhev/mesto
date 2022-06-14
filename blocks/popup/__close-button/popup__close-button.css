@@ -5,9 +5,9 @@
   background-size: contain;
   min-height: 32px;
   min-width: 32px;
-  position: relative;
+  position: absolute;
   left: 438px;
-  top: -370px;
+  top: -40px;
   border: none;
   outline: none;
 }
@@ -17,7 +17,7 @@
     min-height: 20px;
     min-width: 20px;
     left: 262px;
-    top: -358px;
+    top: -34px;
   }
 }
 

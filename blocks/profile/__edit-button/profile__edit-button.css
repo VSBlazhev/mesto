@@ -9,6 +9,7 @@
     border: 1px solid #ffffff;
     min-width: 24px;
     height: 24px;
+    outline: none;
   }
 
   @media screen and (max-width:650px) {
