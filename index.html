@@ -28,56 +28,29 @@
         <button class="profile__add-button" type="button"></button>
       </section>
       <section class="elements">
-        <div class="card">
-          <img
-            src="./images/karachaevsk.jpg"
-            alt="Фотография"
-            class="card__image"
-          />
-          <div class="card__info-container">
-            <h2 class="card__text">Карачаевск</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img src="./images/elbrus.png" alt="Фотография" class="card__image" />
-          <div class="card__info-container">
-            <h2 class="card__text">Гора Эльбрус</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img src="./images/dombay.png" alt="Фотография" class="card__image" />
-          <div class="card__info-container">
-            <h2 class="card__text">Домбай</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img src="./images/elbrus.png" alt="Фотография" class="card__image" />
-          <div class="card__info-container">
-            <h2 class="card__text">Гора Эльбрус</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img
-            src="./images/karachaevsk.jpg"
-            alt="Фотография"
-            class="card__image"
-          />
-          <div class="card__info-container">
-            <h2 class="card__text">Карачаево-Черкессия</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img src="./images/dombay.png" alt="Фотография" class="card__image" />
-          <div class="card__info-container">
-            <h2 class="card__text">Домбай</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
-        </div>
+<template id="card__template">
+  <div class="card">
+    <button class="card__fullscreen-button">
+    <img
+      src=""
+      alt=""
+      class="card__image"
+    />
+    <button class="card__delete-button" type="button"></button>
+    </button>
+    <div class="card__info-container">
+      <h2 class="card__text"></h2>
+      <button class="card__like-button" type="button"></button>
+    </div>
+</template>
+
+
+
+
+
+
+
+
       </section>
     </main>
       <footer class="footer">
@@ -86,6 +59,12 @@
 
       <div class="popup">
         <div class="popup__container">
+          <figure class="popup__figure">
+            <img class="popup__figure-image" 
+              src=""
+                  alt="">
+            <figcaption class="popup__figure-caption"></figcaption>
+          </figure>
           <form name="profile-info" class="popup__info-form">
             <h2 class="popup__heading">Редактировать профиль</h2>
             <input
@@ -102,10 +81,38 @@
             />
             <button class="popup__button" type="submit">Сохранить</button>
           </form>
+
+          <form name="new-place" class="popup__new-place">
+            <h2 class="popup__heading">Новое место</h2>
+            <input
+              name="place-name"
+              class="popup__info-form-input popup__info-form-input_type_place-name"
+              type="text"
+              placeholder="Название"
+            />
+            <input
+              name="place-link"
+              class="popup__info-form-input popup__info-form-input_type_place-link"
+              type="text"
+              placeholder="Ссылка на картинку"
+            />
+            <button class="popup__add-button" type="submit">Создать</button>
+          </form>
+
+
           <button class="popup__close-button" type="button"></button>
         </div>
       </div>
     </div>
+
+
+ 
+
+
+
+
+
+
     <script src="./sripts/index.js"></script>
   </body>
 </html>
