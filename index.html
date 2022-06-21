@@ -13,46 +13,35 @@
         <img class="header__logo" src="./images/logo_white.svg" alt="Логотип" />
       </header>
       <main>
-      <section class="profile">
-        <div class="profile__info-container">
-          <img
-            class="profile__pic"
-            src="./images/profile_pic.jpg"
-            alt="Фотография профиля"
-          />
+        <section class="profile">
+          <div class="profile__info-container">
+            <img
+              class="profile__pic"
+              src="./images/profile_pic.jpg"
+              alt="Фотография профиля"
+            />
 
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <p class="profile__info">Исследователь океана</p>
-          <button class="profile__edit-button" type="button"></button>
-        </div>
-        <button class="profile__add-button" type="button"></button>
-      </section>
-      <section class="elements">
-<template id="card__template">
-  <div class="card">
-    <button class="card__fullscreen-button">
-    <img
-      src=""
-      alt=""
-      class="card__image"
-    />
-    <button class="card__delete-button" type="button"></button>
-    </button>
-    <div class="card__info-container">
-      <h2 class="card__text"></h2>
-      <button class="card__like-button" type="button"></button>
-    </div>
-</template>
-
-
-
-
-
-
-
-
-      </section>
-    </main>
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <p class="profile__info">Исследователь океана</p>
+            <button class="profile__edit-button" type="button"></button>
+          </div>
+          <button class="profile__add-button" type="button"></button>
+        </section>
+        <section class="elements">
+          <template id="card__template">
+            <div class="card">
+              <button class="card__fullscreen-button">
+                <img src="#" alt="" class="card__image" />
+                <button class="card__delete-button" type="button"></button>
+              </button>
+              <div class="card__info-container">
+                <h2 class="card__text"></h2>
+                <button class="card__like-button" type="button"></button>
+              </div>
+            </div>
+          </template>
+        </section>
+      </main>
       <footer class="footer">
         <p class="footer__copyright">© 2020 Mesto Russia</p>
       </footer>
@@ -60,9 +49,7 @@
       <div class="popup">
         <div class="popup__container">
           <figure class="popup__figure">
-            <img class="popup__figure-image" 
-              src=""
-                  alt="">
+            <img class="popup__figure-image" src="#" alt="" />
             <figcaption class="popup__figure-caption"></figcaption>
           </figure>
           <form name="profile-info" class="popup__info-form">
@@ -99,19 +86,10 @@
             <button class="popup__add-button" type="submit">Создать</button>
           </form>
 
-
           <button class="popup__close-button" type="button"></button>
         </div>
       </div>
     </div>
-
-
- 
-
-
-
-
-
 
     <script src="./sripts/index.js"></script>
   </body>
