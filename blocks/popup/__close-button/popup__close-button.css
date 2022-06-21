@@ -6,7 +6,7 @@
   min-height: 32px;
   min-width: 32px;
   position: absolute;
-  left: 438px;
+  right: -40px;
   top: -40px;
   border: none;
   outline: none;
@@ -17,7 +17,7 @@
   .popup__close-button {
     min-height: 20px;
     min-width: 20px;
-    left: 262px;
+    right: 0px;
     top: -34px;
   }
 }

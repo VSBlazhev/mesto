@@ -25,69 +25,51 @@ const initialCards = [
   }
 ]; 
 
-let formElement = document.querySelector('.popup__info-form');
+const formElement = document.querySelector('.popup__info-form');
 
-let nameInput = document.querySelector('.popup__info-form-input_type_name');
+const nameInput = document.querySelector('.popup__info-form-input_type_name');
 
-let jobInput = document.querySelector('.popup__info-form-input_type_info');
+const jobInput = document.querySelector('.popup__info-form-input_type_info');
 
-let profileName = document.querySelector('.profile__name');
+const profileName = document.querySelector('.profile__name');
 
-let profileInfo = document.querySelector('.profile__info');
+const profileInfo = document.querySelector('.profile__info');
 
-let popUpCloseButton = document.querySelector('.popup__close-button');
+const popUpCloseButton = document.querySelector('.popup__close-button');
 
-let popUp = document.querySelector('.popup');
+const popUp = document.querySelector('.popup');
 
-let editButton = document.querySelector('.profile__edit-button');
+const editButton = document.querySelector('.profile__edit-button');
 
-let likeButtons = document.querySelectorAll('.card__like-button');
+const likeButtons = document.querySelectorAll('.card__like-button');
 
-let addButton = document.querySelector('.profile__add-button');
+const addButton = document.querySelector('.profile__add-button');
 
-let placeInput = document.querySelector('.popup__info-form-input_type_place-name');
+const placeInput = document.querySelector('.popup__info-form-input_type_place-name');
 
-let placeLinkInput = document.querySelector('.popup__info-form-input_type_place-link');
+const placeLinkInput = document.querySelector('.popup__info-form-input_type_place-link');
 
-let addForm = document.querySelector('.popup__new-place');
+const addForm = document.querySelector('.popup__new-place');
 
-let fullScreen =document.querySelector('.card__fullscreen-button');
+const fullScreen =document.querySelector('.card__fullscreen-button');
 
-let cardTemplate = document.querySelector('#card__template').content;
+const cardTemplate = document.querySelector('#card__template').content;
 
-//let cardItem = cardTemplate.cloneNode(true);
+const cardImageLInk = document.querySelector('.popup__info-form-input_type_place-link');
 
-let cardImageLInk = document.querySelector('.popup__info-form-input_type_place-link');
+const cardName = document.querySelector('.popup__info-form-input_type_place-name');
 
-let cardName = document.querySelector('.popup__info-form-input_type_place-name');
+const elementsContainer = document.querySelector('.elements');
 
-let elementsContainer = document.querySelector('.elements')
+const addPlace = document.querySelector('.popup__add-button');
 
-let addPlace = document.querySelector('.popup__add-button')
+const popupFigure = document.querySelector('.popup__figure');
 
-//let fullScreenImage = document.querySelector('.popup__figure-image')
+const fullScreenImage = document.querySelector('.popup__figure-image');
 
-//let fullScreenCaption = document.querySelector('.popup__figure-caption')
+const fullScreenCaption = document.querySelector('.popup__figure-caption');
 
-let popupFigure = document.querySelector('.popup__figure');
-
-const fullScreenImage = document.querySelector('.popup__figure-image')
-
-const fullScreenCaption = document.querySelector('.popup__figure-caption')
-
-//function addCard(){
-//cardItem.querySelector('.card__image').src = cardImageLInk.textContent
-//cardItem.querySelector('.card__text').textContent = cardName.textContent
-//elementsContainer.append(cardItem)}
-
-function renderCard(name, link){
-  const cardItem = cardTemplate.cloneNode(true);
-  cardItem.querySelector('.card__image').src= link;
-  cardItem.querySelector('.card__text').textContent = name;
-  elementsContainer.prepend(cardItem);
-}
-
-
+const popUpContainer = document.querySelector('.popup__container');
 
 function renderInitial(){
 initialCards.forEach(function (elm) {
@@ -104,9 +86,6 @@ initialCards.forEach(function (elm) {
     evt.target.parentElement.remove()})
 
   
-
-
-
   cardFullScreenButton.addEventListener('click',(evt)=>{
     openFullScreen()
     fullScreenImage.src = elm.link
@@ -131,13 +110,18 @@ function popupClose() {
   popUp.classList.remove('popup_opened');
 }
 
-function openEditForm() {
-  popUp.classList.add('popup_opened');
-  formElement.style.display='flex'
-  addForm.style.display='none'
-  fullScreenImage.style.display='none'
-  fullScreenCaption.style.display='none'
+function hideUnActiveContent() {
+  popupFigure.style.display = 'none';
+  formElement.style.display='none';
+  addForm.style.display='none';
+}
 
+
+function openEditForm() {
+  hideUnActiveContent()
+  popUp.classList.add('popup_opened');
+  popUpContainer.classList.remove('popup__container_content-type_figure');
+  formElement.style.display='flex'
   nameInput.value = profileName.textContent;
   jobInput.value = profileInfo.textContent;
 }
@@ -145,18 +129,15 @@ function openEditForm() {
 
 
 
- likeButtons.forEach(function (Element){
-  Element.addEventListener('click', function(){Element.classList.toggle('card__like-button_active')})
-})
+
 
 function openAddForm(){
+  hideUnActiveContent()
   popUp.classList.toggle('popup_opened');
-  formElement.style.display='none'
-  fullScreenImage.style.display='none'
-  fullScreenCaption.style.display='none'
-  addForm.style.display='flex'
-  cardName.value = ''
-  cardImageLInk.value=''
+  popUpContainer.classList.remove('popup__container_content-type_figure');
+  addForm.style.display='flex';
+  cardName.value = '';
+  cardImageLInk.value='';
 }
 
 function addNewCard (evt){
@@ -185,12 +166,10 @@ function addNewCard (evt){
 }
 
 function openFullScreen(){
+  hideUnActiveContent();
   popUp.classList.toggle('popup_opened');
-  formElement.style.display='none'
-  addForm.style.display='none'
-  //fullScreenImage.style.display='flex'
-  //fullScreenCaption.style.display='flex'
-popupFigure.style.display='flex'
+  popUpContainer.classList.add('popup__container_content-type_figure');
+  popupFigure.style.display='flex';
 }
 
 
@@ -200,7 +179,7 @@ popUpCloseButton.addEventListener('click', popupClose);
 
 editButton.addEventListener('click', openEditForm);
 
-addButton.addEventListener('click',openAddForm )
+addButton.addEventListener('click',openAddForm );
 
 document.addEventListener('DOMContentLoaded', renderInitial);
 
