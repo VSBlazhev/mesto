@@ -37,7 +37,7 @@ const profileName = document.querySelector('.profile__name');
 
 const profileInfo = document.querySelector('.profile__info');
 
-const popUp = document.querySelector('.popup');
+
 
 const editButton = document.querySelector('.profile__edit-button');
 
@@ -139,9 +139,10 @@ function createCard(name, link){
 
     const cardFullScreenButton = cardItem.querySelector('.card__fullscreen-button');
     cardFullScreenButton.addEventListener('click',(evt)=>{
-      openFullScreen()
+      fullScreenImage.alt = name;
       fullScreenImage.src = link;
       fullScreenCaption.textContent= name;
+      openPopUp(fullScreenPopUp)
     })    
 
     return cardItem
@@ -163,9 +164,7 @@ function closePopUp(popUpName){
   popUpName.classList.remove('popup_opened')
 }
 
-function openFullScreen(){
-openPopUp(fullScreenPopUp)
-}
+
 
 
 
