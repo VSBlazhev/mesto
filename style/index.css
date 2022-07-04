@@ -50,9 +50,7 @@
 @import url(../blocks/popup/__button/_type/popup__button_type_disabled.css);
 @import url(../blocks/popup/__error/popup__error.css);
 @import url(../blocks/popup/__error/_visibility/popup__error_visible.css);
+@import url(../blocks/popup/__label/popup__label.css);
 
 
-.label{
-    position: relative;
-}
 
