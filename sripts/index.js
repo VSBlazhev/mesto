@@ -61,7 +61,7 @@ const placeLinkInput = document.querySelector('.popup__info-form-input_type_plac
 
 const addForm = document.querySelector('.popup__new-place');
 
-const addPlace = addNewPlacePopUp.querySelector('.popup__add-button');
+const addPlace = addNewPlacePopUp.querySelector('.popup__button');
 
 
 //Фулскрин 
@@ -88,6 +88,40 @@ const fullScreenCaption = document.querySelector('.popup__figure-caption');
 
 const popUpContainer = document.querySelector('.popup__container');
 
+const popUp = document.querySelectorAll('.popup')
+
+const configuration = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__info-form-input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_type_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+}
+
+
+
+
+ function closeClick(){
+  const popUpArr = Array.from(popUp)
+  popUpArr.forEach(function (elm) {
+elm.addEventListener('click', (evt)=>{
+if (evt.target.classList.contains('popup')) {
+closePopUp(elm)}
+})
+  })
+ }
+
+closeClick()
+
+
+
+function closeEsc(){
+  const popUpArr = Array.from(popUp)
+  popUpArr.forEach(function (elm) {
+    closePopUp(elm)})  
+}
+
 
 function renderInitial(){
 initialCards.forEach(function (elm) {
@@ -110,16 +144,20 @@ function infoFormSubmitHandler(evt) {
 
 function openEditForm() {
   openPopUp(infoFormPopUp)
+  
   nameInput.value = profileName.textContent;
   jobInput.value = profileInfo.textContent;
+  checkForm(configuration, infoFormPopUp)
 }
 
 
 
 function openAddForm(){
 openPopUp(addNewPlacePopUp)
+
   cardName.value = '';
   cardImageLInk.value='';
+  checkForm(configuration,addNewPlacePopUp)
 }
 
 
@@ -187,3 +225,9 @@ addButton.addEventListener('click',openAddForm );
 document.addEventListener('DOMContentLoaded', renderInitial);
 
 addNewPlacePopUp.addEventListener('submit', addNewCard);
+
+document.addEventListener('keydown', (evt) =>{
+  if(evt.key === 'Escape'){
+    closeEsc()
+  }
+})
