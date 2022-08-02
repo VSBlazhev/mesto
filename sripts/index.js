@@ -1,32 +1,6 @@
-import { Card } from "./card.js";
-import { formValidator } from "./FormValidate.js";
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
 
-const initialCardsN = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
 
 // Форма  профиля
 const infoFormElement = document.querySelector(".popup__info-form");
@@ -69,8 +43,7 @@ const fullScreenImage = document.querySelector(".popup__figure-image");
 
 const fullScreenCaption = document.querySelector(".popup__figure-caption");
 
-const popUp = document.querySelectorAll(".popup");
-
+const allPopUps = document.querySelectorAll(".popup");
 
 const configuration = {
   formSelector: ".popup__form",
@@ -82,7 +55,7 @@ const configuration = {
 };
 
 function closeClick() {
-  const popUpArr = Array.from(popUp);
+  const popUpArr = Array.from(allPopUps);
   popUpArr.forEach(function (elm) {
     elm.addEventListener("click", (evt) => {
       if (evt.target.classList.contains("popup")) {
@@ -100,7 +73,6 @@ function closeEsc(evt) {
     closePopUp(openedPopUp);
   }
 }
-
 
 function infoFormSubmitHandler(evt) {
   evt.preventDefault();
@@ -122,7 +94,7 @@ function openAddForm() {
   
   cardName.value = "";
   cardImageLInk.value = "";
-  validateAddPopup._toggleButtonState();
+  validateAddPopup.toggleButtonState();
 }
 
 function openFullScreen(name, link){
@@ -132,18 +104,25 @@ function openFullScreen(name, link){
   openPopUp(fullScreenPopUp);
 }
 
-
-const validateAddPopup = new formValidator(configuration, addNewPlacePopUp)
+const validateAddPopup = new FormValidator(configuration, addNewPlacePopUp)
 validateAddPopup.enableValidation()
 
-const validateEditPopup = new formValidator(configuration,infoFormPopUp )
+const validateEditPopup = new FormValidator(configuration,infoFormPopUp )
 validateEditPopup.enableValidation()
+
+function createCard(name, link, selector, openFullScreen){
+  const card = new Card(name, link, selector, openFullScreen )
+  return card.generateCard()
+}
 
 function addNewCard(evt) {
   evt.preventDefault();
-  const cardItem = new Card (cardName.value, cardImageLInk.value, '#card__template', openFullScreen );
-  elementsContainer.prepend(cardItem.generateCard());
-  closePopUp(addNewPlacePopUp);
+  const cardItem = createCard(cardName.value, cardImageLInk.value, '#card__template', openFullScreen ); 
+
+  elementsContainer.prepend(cardItem); 
+
+  closePopUp(addNewPlacePopUp); 
+
 }
 
 function openPopUp(popUpName) {
@@ -156,15 +135,11 @@ function closePopUp(popUpName) {
   document.addEventListener("keydown", closeEsc);
 }
 
-
 function renderInitialCards(){
-  initialCardsN.forEach((item) => {
-  const cardElement = new Card(item.name,item.link, '#card__template', openFullScreen);
-  const cardItem = cardElement.generateCard();
-
+  initialCards.forEach((item) => {
+    const cardItem = createCard(item.name,item.link, '#card__template', openFullScreen);
   document.querySelector(".elements").append(cardItem);
 }); }
-
 
 infoFormElement.addEventListener("submit", infoFormSubmitHandler);
 
@@ -182,8 +157,6 @@ fullScreenPopUpCloseButton.addEventListener("click", () =>
 
 addButton.addEventListener("click", openAddForm);
 
-
 addNewPlacePopUp.addEventListener("submit", addNewCard);
-
 
 document.addEventListener("DOMContentLoaded", renderInitialCards)
