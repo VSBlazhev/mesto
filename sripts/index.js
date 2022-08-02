@@ -1,4 +1,7 @@
-const initialCards = [
+import { Card } from "./card.js";
+import { formValidator } from "./FormValidate.js";
+
+const initialCardsN = [
   {
     name: "Архыз",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
@@ -48,17 +51,7 @@ const addNewPlacePopUp = document.querySelector(".popup_content-type_add-place")
 
 const addNewPlaceCloseButton = addNewPlacePopUp.querySelector(".popup__close-button");
 
-const likeButtons = document.querySelectorAll(".card__like-button");
-
 const addButton = document.querySelector(".profile__add-button");
-
-const placeInput = document.querySelector(".popup__info-form-input_type_place-name");
-
-const placeLinkInput = document.querySelector(".popup__info-form-input_type_place-link");
-
-const addForm = document.querySelector(".popup__new-place");
-
-const addPlace = addNewPlacePopUp.querySelector(".popup__button");
 
 //Фулскрин
 
@@ -66,25 +59,18 @@ const fullScreenPopUp = document.querySelector(".popup_content-type_figure");
 
 const fullScreenPopUpCloseButton = fullScreenPopUp.querySelector(".popup__close-button");
 
-const fullScreen = document.querySelector(".card__fullscreen-button");
-
-const cardTemplate = document.querySelector("#card__template").content;
-
 const cardImageLInk = document.querySelector(".popup__info-form-input_type_place-link");
 
 const cardName = document.querySelector(".popup__info-form-input_type_place-name");
 
 const elementsContainer = document.querySelector(".elements");
 
-const popupFigure = document.querySelector(".popup__figure");
-
 const fullScreenImage = document.querySelector(".popup__figure-image");
 
 const fullScreenCaption = document.querySelector(".popup__figure-caption");
 
-const popUpContainer = document.querySelector(".popup__container");
-
 const popUp = document.querySelectorAll(".popup");
+
 
 const configuration = {
   formSelector: ".popup__form",
@@ -115,12 +101,6 @@ function closeEsc(evt) {
   }
 }
 
-function renderInitial() {
-  initialCards.forEach(function (elm) {
-    const cardItem = createCard(elm.name, elm.link);
-    elementsContainer.append(cardItem);
-  });
-}
 
 function infoFormSubmitHandler(evt) {
   evt.preventDefault();
@@ -134,7 +114,7 @@ function openEditForm() {
 
   nameInput.value = profileName.textContent;
   jobInput.value = profileInfo.textContent;
-  checkForm(configuration, infoFormPopUp);
+  validateEditPopup.checkForm();
 }
 
 function openAddForm() {
@@ -142,41 +122,27 @@ function openAddForm() {
   
   cardName.value = "";
   cardImageLInk.value = "";
-  checkForm(configuration, addNewPlacePopUp);
+  validateAddPopup._toggleButtonState();
 }
 
-function createCard(name, link) {
-  const cardItem = cardTemplate.cloneNode(true);
-  const cardItemInfo = cardItem.querySelector(".card__image");
-  cardItemInfo.src = link;
-  cardItemInfo.alt = name;
-  cardItem.querySelector(".card__text").textContent = name;
-
-  const cardLike = cardItem.querySelector(".card__like-button");
-  const cardDelete = cardItem.querySelector(".card__delete-button");
-
-  cardLike.addEventListener("click", (evt) => {
-    evt.target.classList.toggle("card__like-button_active");
-  });
-  cardDelete.addEventListener("click", (evt) => {
-    evt.target.closest(".card").remove();
-  });
-
-  const cardFullScreenButton = cardItem.querySelector(".card__fullscreen-button");
-  cardFullScreenButton.addEventListener("click", (evt) => {
-    fullScreenImage.alt = name;
-    fullScreenImage.src = link;
-    fullScreenCaption.textContent = name;
-    openPopUp(fullScreenPopUp);
-  });
-
-  return cardItem;
+function openFullScreen(name, link){
+  fullScreenImage.alt = name;
+  fullScreenImage.src = link;
+  fullScreenCaption.textContent = name;
+  openPopUp(fullScreenPopUp);
 }
+
+
+const validateAddPopup = new formValidator(configuration, addNewPlacePopUp)
+validateAddPopup.enableValidation()
+
+const validateEditPopup = new formValidator(configuration,infoFormPopUp )
+validateEditPopup.enableValidation()
 
 function addNewCard(evt) {
   evt.preventDefault();
-  const cardItem = createCard(cardName.value, cardImageLInk.value);
-  elementsContainer.prepend(cardItem);
+  const cardItem = new Card (cardName.value, cardImageLInk.value, '#card__template', openFullScreen );
+  elementsContainer.prepend(cardItem.generateCard());
   closePopUp(addNewPlacePopUp);
 }
 
@@ -190,6 +156,16 @@ function closePopUp(popUpName) {
   document.addEventListener("keydown", closeEsc);
 }
 
+
+function renderInitialCards(){
+  initialCardsN.forEach((item) => {
+  const cardElement = new Card(item.name,item.link, '#card__template', openFullScreen);
+  const cardItem = cardElement.generateCard();
+
+  document.querySelector(".elements").append(cardItem);
+}); }
+
+
 infoFormElement.addEventListener("submit", infoFormSubmitHandler);
 
 infoFormCloseButton.addEventListener("click", () => closePopUp(infoFormPopUp));
@@ -198,7 +174,7 @@ buttonEdit.addEventListener("click", openEditForm);
 
 addNewPlaceCloseButton.addEventListener("click", () =>
   closePopUp(addNewPlacePopUp)
-);
+); 
 
 fullScreenPopUpCloseButton.addEventListener("click", () =>
   closePopUp(fullScreenPopUp)
@@ -206,6 +182,8 @@ fullScreenPopUpCloseButton.addEventListener("click", () =>
 
 addButton.addEventListener("click", openAddForm);
 
-document.addEventListener("DOMContentLoaded", renderInitial);
 
 addNewPlacePopUp.addEventListener("submit", addNewCard);
+
+
+document.addEventListener("DOMContentLoaded", renderInitialCards)
